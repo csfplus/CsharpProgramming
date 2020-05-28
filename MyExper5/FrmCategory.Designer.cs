@@ -34,6 +34,7 @@
             this.txtSort = new System.Windows.Forms.NumericUpDown();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.lblId = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txtSort)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,6 +101,16 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // lblId
+            // 
+            this.lblId.AutoSize = true;
+            this.lblId.Location = new System.Drawing.Point(15, 104);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(11, 12);
+            this.lblId.TabIndex = 6;
+            this.lblId.Text = "0";
+            this.lblId.Visible = false;
+            // 
             // FrmCategory
             // 
             this.AcceptButton = this.btnOK;
@@ -107,6 +118,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(245, 131);
+            this.Controls.Add(this.lblId);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.txtSort);
@@ -133,5 +145,6 @@
         private System.Windows.Forms.NumericUpDown txtSort;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Label lblId;
     }
 }

@@ -40,12 +40,31 @@ namespace MyExper5
             {
                 //todo
                 //弹出一个新窗体进行编辑(和添加窗体界面。)
+                FrmCategory frm = new FrmCategory(treeView1.SelectedNode.Tag);
+                if (frm.ShowDialog() == DialogResult.OK) loadCategory();
             }
         }
         private void tsbtnCategoryDelete_Click(object sender, EventArgs e)
         {
-            if (treeView1.SelectedNode != null)
+            if (treeView1.SelectedNode != null && MessageBox.Show($"确定要删除【{treeView1.SelectedNode.Text}】吗？", "删除提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                using (SqlConnection conn = new SqlConnection(AppConst.DbPath))
+                {
+                    using (SqlCommand cmd = new SqlCommand($"delete  from tb_category where cateid={treeView1.SelectedNode.Tag}", conn))
+                    {
+                        conn.Open();
+                        if (Convert.ToInt32(cmd.ExecuteNonQuery()) > 0)
+                        {
+                            MessageBox.Show("删除成功");
+                            //重新加载事件
+                            loadCategory();
+                        }
+                        else
+                        {
+                            MessageBox.Show("删除失败！");
+                        }
+                    }
+                }
 
             }
         }
@@ -67,7 +86,7 @@ namespace MyExper5
                         while (dr.Read())
                         {
                             tn = treeView1.Nodes.Add(dr["catename"].ToString());
-                            tn.Tag = dr["cateid"];
+                            tn.Tag = dr["cateid"];  //将主键保存起来
                         }
                     }
                 }
@@ -132,6 +151,11 @@ namespace MyExper5
                     }
                 }
             }
+        }
+
+        private void tsbtnTaskEdit_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
